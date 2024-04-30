@@ -1,6 +1,7 @@
 import { ModeToggle } from "@/components/mode-switch";
-import { SearchInput } from "../../compositions/search-input";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { SearchInput } from "../../compositions/search-input";
 
 export function Header() {
     return (
@@ -9,7 +10,12 @@ export function Header() {
                 <h1 className="text-xl font-bold">Photos</h1>
             </Link>
             <SearchInput />
-            <ModeToggle />
+            <div className="flex items-center justify-end gap-2">
+                <Button variant="outline" asChild>
+                    <Link href="/gallery">Gallery</Link>
+                </Button>
+                <ModeToggle />
+            </div>
         </header>
     );
 }

@@ -1,26 +1,13 @@
+import { getPhoto } from '@/lib/fetchClient'
 import { HeartFilledIcon } from '@radix-ui/react-icons'
 import Image from 'next/image'
 import { notFound } from "next/navigation"
 
-type TPhotoData = {
-    id: string
-    description: string | null
-    blurHash: string
-    urls: Record<'full' | 'regular', string>
-    likes: number,
-    user: {
-        name: string
-        username: string
-        profileImage: Record<'medium', string>
-    }
-
-}
 
 export default async function PhotoPage({params}: {params: {id: string}}) {
     if (!params.id) return notFound()
 
-    const photoRes = await fetch(`http://localhost:3000/api/photos/${params.id}`)
-    const photoData = await photoRes.json() as TPhotoData
+    const photoData = await getPhoto(params.id)
 
     if (!photoData) {
         return notFound()

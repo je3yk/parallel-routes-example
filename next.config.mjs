@@ -5,6 +5,14 @@ const nextConfig = {
             {
                 hostname: 'images.unsplash.com',
                 protocol: 'https',
+            },
+            {
+                hostname: 'secure.rezserver.com',
+                protocol: 'https',
+            },
+            {
+                hostname: 'via.placeholder.com',
+                protocol: 'http',
             }
         ],
     },
