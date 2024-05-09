@@ -15,6 +15,9 @@ export function Header() {
                     <Link href="/gallery">Gallery</Link>
                 </Button>
                 <ModeToggle />
+                <Button variant="outline" asChild>
+                    <Link href="https://github.com/je3yk/parallel-routes-example">GitHub</Link>
+                </Button>
             </div>
         </header>
     );
