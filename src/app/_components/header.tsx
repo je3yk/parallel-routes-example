@@ -1,6 +1,7 @@
 import { ModeToggle } from "@/components/mode-switch";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Suspense } from "react";
 import { SearchInput } from "../../compositions/search-input";
 
 export function Header() {
@@ -9,7 +10,9 @@ export function Header() {
             <Link href="/">
                 <h1 className="text-xl font-bold">Photos</h1>
             </Link>
-            <SearchInput />
+            <Suspense fallback={null}>
+                <SearchInput />
+            </Suspense>
             <div className="flex items-center justify-end gap-2">
                 <Button variant="outline" asChild>
                     <Link href="/gallery">Gallery</Link>
