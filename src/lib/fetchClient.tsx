@@ -6,9 +6,9 @@ function getBaseUrl() {
         return ''
     }
 
-    if (process.env.VERCEL_URL) {
-        return `http://${process.env.VERCEL_URL}`
-    }
+    // if (process.env.VERCEL_URL) {
+    //     return `http://${process.env.VERCEL_URL}`
+    // }
 
     if (process.env.NEXT_PUBLIC_VERCEL_URL) {
         return `http://${process.env.NEXT_PUBLIC_VERCEL_URL}`
