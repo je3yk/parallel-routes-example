@@ -1,23 +1,16 @@
+import { searchPhotos } from "@/lib/fetchClient";
 import { ReactImageGalleryItem } from "react-image-gallery";
-import { ApiResponse } from "unsplash-js/dist/helpers/response";
-import { Photos } from "unsplash-js/dist/methods/search/types/response";
-import { GalleryItem } from "./components/GalleryItem";
 import { ImageGallery } from "./components/ImageGallery";
 
-
-type PhotosSearchResponse = { data: NonNullable<ApiResponse<Photos>['response']>['results'] | never[], total: number }
-
 export default async function GalleryPage() {
-    const photosRes = await fetch(`http://localhost:3000/api/photos/search?q=random`)
-    const {data} = await photosRes.json() as PhotosSearchResponse
-
-    if (!data) {
+    const photosRes = await searchPhotos('random')
+    if (!photosRes) {
         return <div>No results</div>
     }
 
     const images: ReactImageGalleryItem[] = [
         { original: 'https://secure.rezserver.com/img/hotel_img_na.jpg&w=48&q=75'},
-        ...data.slice(0,5).map((photo) => {
+        ...photosRes.data?.slice(0,5).map((photo) => {
             return ({
                 original: photo.urls.regular,
                 originalWidth: 500,

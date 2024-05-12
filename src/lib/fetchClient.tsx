@@ -1,9 +1,11 @@
-'use client'
-
 import { ApiResponse } from "unsplash-js/dist/helpers/response"
 import { Photos } from "unsplash-js/dist/methods/search/types/response"
 
 function getBaseUrl() {
+    if (typeof window !== 'undefined') {
+        return ''
+    }
+
     if (process.env.VERCEL_URL) {
         return `https://${process.env.VERCEL_URL}`
     }
