@@ -1,3 +1,5 @@
+'use client'
+
 import { ApiResponse } from "unsplash-js/dist/helpers/response"
 import { Photos } from "unsplash-js/dist/methods/search/types/response"
 
