@@ -21,6 +21,9 @@ const nextConfig = {
             fullUrl: true,
         },
     },
+    experimental: {
+        instrumentationHook: true,
+    }
 };
 
 export default nextConfig;
