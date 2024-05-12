@@ -7,17 +7,17 @@ function getBaseUrl() {
     }
 
     if (process.env.VERCEL_URL) {
-        return `https://${process.env.VERCEL_URL}`
+        return `http://${process.env.VERCEL_URL}`
     }
 
     if (process.env.NEXT_PUBLIC_VERCEL_URL) {
-        return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+        return `http://${process.env.NEXT_PUBLIC_VERCEL_URL}`
     }
 
     return `http://localhost:${process.env.PORT ?? 3000}`
 }
 
-const BASE_URL = `${getBaseUrl()}/api`
+const BASE_URL = getBaseUrl() === '' ? null : `${getBaseUrl()}/api`
 
 type PhotosSearchResponse = { data: NonNullable<ApiResponse<Photos>['response']>['results'] | never[], total: number }
 
@@ -35,13 +35,31 @@ type PhotoData = {
 }
 
 const searchPhotos = async (query: string) => {
-    const res = await fetch(`${BASE_URL}/photos/search?q=${query}`)
-    return res.json() as Promise<PhotosSearchResponse>
+    try {
+        if (!BASE_URL) {
+            return null
+        }
+        const res = await fetch(`${BASE_URL}/photos/search?q=${query}`)
+        console.log('searchPhotos-res', res)
+        return res.json() as Promise<PhotosSearchResponse>
+    } catch (err) {
+        console.log('searchPhotos-err', err)
+        return null
+    }
 }
 
 const getPhoto = async (id: string) => {
-    const res = await fetch(`${BASE_URL}/photos/${id}`)
-    return res.json() as Promise<PhotoData>
+    try {
+        if (!BASE_URL) {
+            return null
+        }
+        const res = await fetch(`${BASE_URL}/photos/${id}`)
+        console.log('getPhoto-res', res)
+        return res.json() as Promise<PhotoData>
+    } catch (err) {
+        console.log('getPhoto-err', err)
+        return null
+    }
 }
 
 export {

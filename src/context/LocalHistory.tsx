@@ -19,6 +19,7 @@ export const LocalHistoryProvider = ({ children }: {children: React.ReactNode}) 
     useEffect(() => {
         try {
             const history = localStorage.getItem('history')
+            console.log('history', history)
             const parsedHistory = history ? JSON.parse(history) as HistoryItems : null
             setHistory(parsedHistory)
         } catch (e) {

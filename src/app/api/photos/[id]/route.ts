@@ -5,7 +5,7 @@ export async function GET(_: NextRequest, { params }: { params: { id: string } }
 
     const data = await unsplashClient.photos.get({ photoId: params.id })
 
-
+    console.log('photo-data-unsplash', data)
     if (!data.response) return NextResponse.json(null, { status: 404 })
 
     const photoData = data.response && {

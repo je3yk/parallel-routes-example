@@ -5,7 +5,7 @@ import { Basic } from 'unsplash-js/dist/methods/photos/types'
 import { HistoryClient } from './historyClient'
 
 export default async function SearchResults({searchParams}: {searchParams: { q?: string}}) {
-    const {data, total} = await searchPhotos(searchParams.q ?? 'black-white')
+    const {data, total} = (await searchPhotos(searchParams.q ?? 'black-white')) ?? {data: null, total: 0}
 
     
     if (!data) {

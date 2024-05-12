@@ -11,6 +11,6 @@ if (!ACCESS_KEY) {
 }
 
 export const unsplashClient = createApi({
-   accessKey: process.env.UNSPLASH_ACCESS_KEY ?? '',
+   accessKey: ACCESS_KEY ?? '',
 })
 
