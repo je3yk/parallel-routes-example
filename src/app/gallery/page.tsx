@@ -1,4 +1,4 @@
-import {searchPhotos} from "@/lib/fetchClient";
+import {searchPhotos} from "@/lib/unsplashClient";
 import {ReactImageGalleryItem} from "react-image-gallery";
 import {ImageGallery} from "./components/ImageGallery";
 

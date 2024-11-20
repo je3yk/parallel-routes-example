@@ -1,7 +1,7 @@
-import { getPhoto } from '@/lib/fetchClient'
-import { HeartFilledIcon } from '@radix-ui/react-icons'
+import {getPhoto} from '@/lib/unsplashClient'
+import {HeartFilledIcon} from '@radix-ui/react-icons'
 import Image from 'next/image'
-import { notFound } from "next/navigation"
+import {notFound} from "next/navigation"
 
 
 export default async function PhotoPage({params}: {params: {id: string}}) {

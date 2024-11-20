@@ -1,24 +1,11 @@
 import {NextRequest, NextResponse} from "next/server";
-import {unsplashClient} from "../unsplashClient";
+import {getPhoto} from "../../../../lib/unsplashClient";
 
 export async function GET(_: NextRequest, { params }: { params: { id: string } }) {
     console.log('params', params);
-    const data = await unsplashClient.photos.get({ photoId: params.id })
+    const photoData = await getPhoto(params.id)
 
-    if (!data.response) return NextResponse.json(null, { status: 404 })
-
-    const photoData = data.response && {
-        id: data.response.id,
-        description: data.response.description,
-        urls: data.response.urls,
-        likes: data.response.likes,
-        blurHash: data.response.blur_hash,
-        user: {
-            name: data.response.user.name,
-            username: data.response.user.username,
-            profileImage: data.response.user.profile_image
-        }
-    }
+    if (!photoData) return NextResponse.json(null, { status: 404 })
 
     return NextResponse.json(photoData)
 }

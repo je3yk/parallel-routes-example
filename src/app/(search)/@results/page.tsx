@@ -1,4 +1,4 @@
-import {searchPhotos} from '@/lib/fetchClient'
+import {searchPhotos} from '@/lib/unsplashClient'
 import Image from 'next/image'
 import Link from 'next/link'
 import {Basic} from 'unsplash-js/dist/methods/photos/types'
