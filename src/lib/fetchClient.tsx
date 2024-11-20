@@ -1,15 +1,7 @@
-import { ApiResponse } from "unsplash-js/dist/helpers/response"
-import { Photos } from "unsplash-js/dist/methods/search/types/response"
+import {ApiResponse} from "unsplash-js/dist/helpers/response";
+import {Photos} from "unsplash-js/dist/methods/search/types/response";
 
 function getBaseUrl() {
-    if (typeof window !== 'undefined') {
-        return ''
-    }
-
-    if (process.env.VERCEL_URL) {
-        return `https://${process.env.VERCEL_URL}`
-    }
-
     if (process.env.NEXT_PUBLIC_VERCEL_URL) {
         return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
     }
@@ -35,16 +27,38 @@ type PhotoData = {
 }
 
 const searchPhotos = async (query: string) => {
-    const res = await fetch(`${BASE_URL}/photos/search?q=${query}`)
-    return res.json() as Promise<PhotosSearchResponse>
+    try {
+        console.log('baseUrl', BASE_URL, query);
+        const res = await fetch(`${BASE_URL}/photos/search?q=${encodeURIComponent(query)}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            }
+        })
+
+        const response = await res.json() as Promise<PhotosSearchResponse>
+        return response;
+    } catch (e) {
+        console.error('searchPhotos-error', e)
+        return null;
+    }
 }
 
 const getPhoto = async (id: string) => {
-    const res = await fetch(`${BASE_URL}/photos/${id}`)
-    return res.json() as Promise<PhotoData>
+    try {
+        const res = await fetch(`${BASE_URL}/photos/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            }
+        })
+        const response = await res.json() as Promise<PhotoData>
+        return response;
+    } catch (e) {
+        console.error('getPhoto-error', e)
+        return null;
+    }
 }
 
-export {
-    getPhoto, searchPhotos
-}
+export {getPhoto, searchPhotos};
 

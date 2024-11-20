@@ -1,10 +1,10 @@
  'use client'
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons"
-import { useRouter, useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react"
+import {Button} from "@/components/ui/button"
+import {Input} from "@/components/ui/input"
+import {MagnifyingGlassIcon} from "@radix-ui/react-icons"
+import {useRouter, useSearchParams} from "next/navigation"
+import {useEffect, useState} from "react"
 
 export function SearchInput() {
     const searchParams = useSearchParams()
@@ -21,7 +21,8 @@ export function SearchInput() {
     
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        router.replace(`/?q=${search}`)
+        const query = search ? `?q=${search}` : ''
+        router.replace(`/${query}`)
     }
 
     return (

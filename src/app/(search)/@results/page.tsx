@@ -1,16 +1,19 @@
-import { searchPhotos } from '@/lib/fetchClient'
+import {searchPhotos} from '@/lib/fetchClient'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Basic } from 'unsplash-js/dist/methods/photos/types'
-import { HistoryClient } from './historyClient'
+import {Basic} from 'unsplash-js/dist/methods/photos/types'
+import {HistoryClient} from './historyClient'
 
 export default async function SearchResults({searchParams}: {searchParams: { q?: string}}) {
-    const {data, total} = await searchPhotos(searchParams.q ?? 'black-white')
+    const {q} = searchParams
+    const searchResponse = await searchPhotos(q && q !== '' ? q : 'black-white')
 
     
-    if (!data) {
+    if (!searchResponse) {
         return <div>No results</div>
     }
+
+    const {data, total} = searchResponse
     
     if (!searchParams.q) {
         return <div className="grid grid-cols-4 gap-2 p-2 w-full">

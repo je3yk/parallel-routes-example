@@ -1,10 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
-import { unsplashClient } from "../unsplashClient";
+import {NextRequest, NextResponse} from "next/server";
+import {unsplashClient} from "../unsplashClient";
 
 export async function GET(_: NextRequest, { params }: { params: { id: string } }) {
-
+    console.log('params', params);
     const data = await unsplashClient.photos.get({ photoId: params.id })
-
 
     if (!data.response) return NextResponse.json(null, { status: 404 })
 

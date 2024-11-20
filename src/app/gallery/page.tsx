@@ -1,6 +1,6 @@
-import { searchPhotos } from "@/lib/fetchClient";
-import { ReactImageGalleryItem } from "react-image-gallery";
-import { ImageGallery } from "./components/ImageGallery";
+import {searchPhotos} from "@/lib/fetchClient";
+import {ReactImageGalleryItem} from "react-image-gallery";
+import {ImageGallery} from "./components/ImageGallery";
 
 export default async function GalleryPage() {
     const photosRes = await searchPhotos('random')
